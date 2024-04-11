@@ -1,3 +1,7 @@
+//    git add README.md
+//    git commit -m "escreva"
+//    git push -u origin main
+
 #include <stdio.h>
 #include "tarefas.h"
 

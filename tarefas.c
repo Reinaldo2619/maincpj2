@@ -1,3 +1,7 @@
+//    git add README.md
+//    git commit -m "escreva"
+//    git push -u origin main
+
 #include <stdio.h>
 #include <string.h>
 #include "tarefas.h"
@@ -25,11 +29,11 @@ ERROS deletar(Tarefa tarefas[], int *pos){
     if(*pos == 0)
         return SEM_TAREFAS;
 
-    // verifica se a tarefa escolhida existe
+    // verifica se a tarefa existe
     int pos_deletar;
     printf("Entre com a posicao da tarefa a ser deletada: ");
     scanf("%d", &pos_deletar);
-    pos_deletar--; // garantir posicao certa no array
+    pos_deletar--; // garantir posicao correta
     if(pos_deletar >= *pos || pos_deletar < 0)
         return NAO_ENCONTRADO;
 

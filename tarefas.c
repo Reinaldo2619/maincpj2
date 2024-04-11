@@ -90,24 +90,32 @@ ERROS listar(Tarefa tarefas[], int *pos){
 }
 
 // Implementação da função para exportar as tarefas para um arquivo de texto
+// Implementação da função para exportar as tarefas para outras categorias
 ERROS exportar(Tarefa tarefas[], int *pos) {
-    char nome_arquivo[100];
-    // Solicita ao usuário o nome do arquivo para exportar as tarefas
-    printf("Digite o nome do arquivo para exportar as tarefas: ");
-    fgets(nome_arquivo, 100, stdin);
-    FILE *f = fopen(nome_arquivo, "w");
-    if (f == NULL)
-        return ABRIR; // Retorna ABRIR se houver erro ao abrir o arquivo
+    // Verifica se existem tarefas para exportar
+    if (*pos == 0)
+        return SEM_TAREFAS;
 
-    // Escreve as tarefas no arquivo
-    for (int i = 0; i < *pos; i++) {
-        fprintf(f, "Prioridade: %d\n", tarefas[i].prioridade);
-        fprintf(f, "Categoria: %s", tarefas[i].categoria);
-        fprintf(f, "Descricao: %s", tarefas[i].descricao);
-    }
+    int indice_tarefa;
+    printf("Entre com a posição da tarefa a ser exportada: ");
+    scanf("%d", &indice_tarefa);
+    indice_tarefa--; // Ajusta a posição para o índice do array
+    if (indice_tarefa >= *pos || indice_tarefa < 0)
+        return NAO_ENCONTRADO; // Retorna NAO_ENCONTRADO se a posição for inválida
 
-    fclose(f); // Fecha o arquivo
-    return OK; // Retorna OK para indicar sucesso na exportação das tarefas
+    char nova_categoria[TAM_CATEGORIA];
+    printf("Entre com a nova categoria para a tarefa: ");
+    getchar(); // Limpa o buffer do teclado
+    fgets(nova_categoria, TAM_CATEGORIA, stdin);
+
+    // Remove a quebra de linha do final da categoria
+    nova_categoria[strcspn(nova_categoria, "\n")] = 0;
+
+    // Atualiza a categoria da tarefa selecionada
+    strcpy(tarefas[indice_tarefa].categoria, nova_categoria);
+
+    // Retorna OK para indicar sucesso na exportação da tarefa
+    return OK;
 }
 
 // Implementação da função para salvar as tarefas em um arquivo binário

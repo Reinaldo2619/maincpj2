@@ -60,7 +60,7 @@ ERROS listar(Tarefa tarefas[], int *pos){
 
     char categoria[TAM_CATEGORIA];
     // Solicita a categoria para listar as tarefas correspondentes
-    printf("Digite a categoria para listar ");
+    printf("Digite a categoria para listar  ");
     fgets(categoria, TAM_CATEGORIA, stdin);
     if (categoria[0] == '\n') {
         // Lista todas as tarefas se a categoria estiver vazia

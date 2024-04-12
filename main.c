@@ -7,7 +7,7 @@ int main() {
 
   Tarefa tarefas[TOTAL];
   int pos = 0;
-  ERROS erro = fs4; // Assuming fs[4] is the 'carregar' function
+  ERROS erro = fs[4](tarefas, &pos); 
   if (erro != OK) {
     printf("Error loading tasks: %d\n", erro);
     return 1;
@@ -26,8 +26,9 @@ int main() {
     opcao--;
     if (opcao > 2)
       printf("Opcao invalida\n");
+    
     else if (opcao >= 0) {
-      erro = fsopcao; // Call the appropriate function based on the option
+      fs[opcao](tarefas, &pos);
       if (erro != OK) {
         printf("Error executing operation: %d\n", erro);
         return 1;
@@ -37,7 +38,7 @@ int main() {
 
   } while (opcao >= 0);
 
-  erro = fs3; // Assuming fs[3] is the 'salvar' function
+  fs[opcao](tarefas, &pos); // Assuming fs[3] is the 'salvar' function
   if (erro != OK) {
     printf("Error saving tasks: %d\n", erro);
     return 1;

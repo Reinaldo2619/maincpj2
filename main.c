@@ -1,71 +1,47 @@
-//    git add README.md
-//    git commit -m "escreva"
-//    git push -u origin main
-
+// main.c
 #include <stdio.h>
 #include "tarefas.h"
 
-#define TAM_CATEGORIA 100
-#define TAM_DESCRICAO 300
-#define TOTAL 100
-
 int main() {
-    funcao fs[] = {criar, deletar, listar, exportar, salvar, carregar};
-    Tarefa tarefas[TOTAL];
-    int pos;
-    ERROS erro = fs[5](tarefas, &pos); // Carrega as tarefas do arquivo binário
-    if (erro != OK)
-        pos = 0; // Define a posição como 0 se houver erro ao carregar as tarefas
+  funcao fs[] = {criar, deletar, listar, salvar, carregar};
 
-    int opcao;
-    do {
-        printf("\nMenu principal\n");
-        printf("1 - Criar tarefa\n");
-        printf("2 - Deletar tarefa\n");
-        printf("3 - Listar tarefas\n");
-        printf("4 - Exportar tarefas\n"); // Opção para exportar as tarefas para um arquivo de texto
-        printf("5 - Salvar tarefas\n");
-        printf("6 - Carregar tarefas\n");
-        printf("0 - Sair\n");
-        printf("Escolha uma opcao: ");
-        scanf("%d", &opcao);
-        opcao--;
+  Tarefa tarefas[TOTAL];
+  int pos = 0;
+  ERROS erro = fs4; // Assuming fs[4] is the 'carregar' function
+  if (erro != OK) {
+    printf("Error loading tasks: %d\n", erro);
+    return 1;
+  }
 
-        if (opcao < 0 || opcao > 5) {
-            printf("Opcao invalida\n");
-            continue;
-        }
+  int opcao;
+  do {
+    printf("\nMenu principal\n");
+    printf("1 - Criar tarefa\n");
+    printf("2 - Deletar tarefa\n");
+    printf("3 - Listar tarefas\n");
+    printf("0 - Sair\n");
+    printf("Escolha uma opcao: ");
 
-        ERROS resultado = fs[opcao](tarefas, &pos);
-        if (resultado != OK) {
-            printf("Erro: ");
-            switch (resultado) {
-                case MAX_TAREFA:
-                    printf("Limite de tarefas atingido.\n");
-                    break;
-                case SEM_TAREFAS:
-                    printf("Nao ha tarefas.\n");
-                    break;
-                case NAO_ENCONTRADO:
-                    printf("Tarefa nao encontrada.\n");
-                    break;
-                case ABRIR:
-                    printf("Erro ao abrir arquivo.\n");
-                    break;
-                case FECHAR:
-                    printf("Erro ao fechar arquivo.\n");
-                    break;
-                case ESCREVER:
-                    printf("Erro ao escrever no arquivo.\n");
-                    break;
-                case LER:
-                    printf("Erro ao ler do arquivo.\n");
-                    break;
-            }
-        }
-    } while (opcao >= 0);
+    scanf("%d", &opcao);
+    opcao--;
+    if (opcao > 2)
+      printf("Opcao invalida\n");
+    else if (opcao >= 0) {
+      erro = fsopcao; // Call the appropriate function based on the option
+      if (erro != OK) {
+        printf("Error executing operation: %d\n", erro);
+        return 1;
+      }
+    } else
+      printf("Sair...\n");
 
-    fs[4](tarefas, &pos); // Salva as tarefas antes de sair
+  } while (opcao >= 0);
 
-    return 0;
+  erro = fs3; // Assuming fs[3] is the 'salvar' function
+  if (erro != OK) {
+    printf("Error saving tasks: %d\n", erro);
+    return 1;
+  }
+
+  return 0;
 }

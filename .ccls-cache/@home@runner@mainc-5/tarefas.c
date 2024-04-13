@@ -60,13 +60,15 @@ ERROS listar(Tarefa tarefas[], int *pos){
 
     char categoria[TAM_CATEGORIA];
     // Solicita a categoria para listar as tarefas correspondentes
-    printf("Digite a categoria para listar ");
+    printf("Digite a categoria para listar  ");
     fgets(categoria, TAM_CATEGORIA, stdin);
     if (categoria[0] == '\n') {
         // Lista todas as tarefas se a categoria estiver vazia
-        for(int i=0; i<*pos; i++){
+        for(int i=0; i<*pos; i++){ 
             printf("Prioridade: %d\t", tarefas[i].prioridade);
+            printf("\n");
             printf("Categoria: %s\t", tarefas[i].categoria);
+            printf("\n");
             printf("Descrição: %s\n", tarefas[i].descricao);
         }
     } else {
@@ -75,7 +77,9 @@ ERROS listar(Tarefa tarefas[], int *pos){
         for(int i=0; i<*pos; i++){
             if (strcmp(tarefas[i].categoria, categoria) == 0) {
                 printf("Prioridade: %d\t", tarefas[i].prioridade);
+                printf("\n");
                 printf("Categoria: %s\t", tarefas[i].categoria);
+                printf("\n");
                 printf("Descrição: %s\n", tarefas[i].descricao);
                 encontradas++;
             }
